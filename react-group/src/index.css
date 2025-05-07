@@ -245,3 +245,6 @@ Media queries
       grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
   }
 }
+
+
+@import "tailwindcss";

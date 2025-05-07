@@ -1,13 +1,40 @@
-import { useState} from 'react'
+import { useState, useEffect} from 'react'
 import { decodeEntity } from 'html-entities'
 import Form from './components/Form.jsx'
 import MemoryCard from './components/MemoryCard.jsx'
+import GameOver from './components/GameOver.jsx'
 
 export default function App() {
     const [isGameOn, setIsGameOn] = useState(false)
-    const [emojisData, setEmojisData] = useState([]);
+    const [emojisData, setEmojisData] = useState([])
+    const [selectedCards, setSelectedCards] = useState([])
+    const [matchedCards, setMatchedCards] =useState([])
+    const [allMatched, setAllMatched] = useState(false)
+  
+    console.log(matchedCards)
+    //END GAME WHEN ALL CARDS ARE MATCHED
+    useEffect(()=>{
 
-    
+        //CHECK ARRAY NOT EMPTY AND IF MATCHED ALL EMOJIS
+        if(matchedCards.length === emojisData.length && emojisData.length){
+            setAllMatched(true)
+        }
+
+    },[matchedCards])
+    //TRACK MATCHES WHENEVER CARD SELECTED
+    useEffect(()=> {
+        
+        //VERIFY AT LEAST 2 CARDS SELECTED & NAMES MATCH EXACTLY
+        if(selectedCards.length === 2 && selectedCards[0].name === selectedCards[1].name){
+
+            //ADD CURRENT MATCHED OBJECTS TO ALL PREVIOUS MATCHED OBJECTS
+            setMatchedCards(previous => [...previous, ...selectedCards ])
+
+        }
+
+
+    },[selectedCards])
+
     async function startGame(e) {
         //PREVENT BUTTON FROM DEFAULT FORM ACTION
         e.preventDefault()
@@ -84,17 +111,50 @@ export default function App() {
 
     }//END OF GETEMOJISARRAY
 
+
     function turnCard(name, index) {
 
-        //TEST BUTTON CLICK MEMORY CARD
-        console.log(`The emoji name is ${name} and the index is: ${index}`)
+        //STORE THE INDEX OF SELECTED CARD
+        const selectedCardEntry = selectedCards.find(emoji => emoji.index == index)
+
+        //CHECK SAME CARD NOT SELECTED AND 1 OR LESS CARDS PICKED
+        if(!selectedCardEntry && selectedCards.length < 2){
+
+            //STORE THE PREVIOUS CARD SELECTION
+            setSelectedCards(previous => [...previous, {name: name, index: index}])
+
+        }else if(!selectedCardEntry && selectedCards.length === 2){
+
+            //OVERRITE SELECTION WITH NEW CARDS 
+            setSelectedCards([{name: name, index: index,}]);
+    
+        }
+       
     }//END OF TURNCARD
+
+    function resetGame(){
+        setIsGameOn(false)
+        setSelectedCards([])
+        setMatchedCards([])
+        setAllMatched(false)
+        
+    }
     
     return (
         <main>
             <h1>Memory</h1>
+    
             {!isGameOn && <Form handleSubmit={startGame} />}
-            {isGameOn && <MemoryCard handleClick={turnCard} data={emojisData} />}
+    
+            {allMatched && <GameOver handleClick={resetGame}/>}
+        
+            {isGameOn && <MemoryCard 
+                handleClick={turnCard} 
+                data={emojisData} 
+                selectedCards={selectedCards}
+                matchedCards={matchedCards}
+                    
+             />}
         </main>
     )
 }
