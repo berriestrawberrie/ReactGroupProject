@@ -27,8 +27,6 @@ function LoginForm() {
           type="text" 
           placeholder="Username" 
           required 
-          pattern="^[a-zA Z0-9]{4,15}$"
-          title="4-15 characters. Only letters and numbers."
           className="w-full py-2 pl-10 pr-4 rounded-md bg-rose-400 text-white placeholder-pink-50 focus:outline-none focus:ring-2 focus:ring-red-400"
           />
           <BsEmojiKiss className="absolute right-5 top-1/2 transform -translate-y-1/2 text-[30px] text-pink-50"/>
@@ -39,8 +37,6 @@ function LoginForm() {
           type="password" 
           placeholder="Password" 
           required 
-          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
-          title="At least 6 characters with letters and numbers."
           className="w-full py-2 pl-10 pr-4 rounded-md bg-rose-400 text-white placeholder-pink-50 focus:outline-none focus:ring-2 focus:ring-red-400"
           />
           <GiHeartKey className="absolute right-5 top-1/2 transform -translate-y-1/2 text-[30px] text-pink-50"/>
@@ -51,18 +47,18 @@ function LoginForm() {
             <input type="checkbox" className="accent-pink-900"/>
             Remember me
           </label>
-          <a href="#" className="hover:underline hover:text-pink-50">Forgot password?</a>
+          <a href="/ForgotPassword" className="hover:underline hover:text-pink-50">Forgot password?</a>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-rose-500 py-2 rounded-full hover:bg-rose-400 transition"
+          className="w-full bg-rose-500 py-2 rounded-full hover:bg-rose-400 transition text-pink-50"
         >
           Login
         </button>
 
         <p className="text-sm text-center mt-4 text-pink-50">
-          Don't have an account?{" "}
+            New player? Let´s get you in the game! {" "}
           <span
             onClick={() => navigate("/signup")}
             className="underline cursor-pointer hover:text-rose-400"
