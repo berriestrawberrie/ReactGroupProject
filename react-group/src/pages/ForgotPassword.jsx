@@ -10,6 +10,7 @@ function ForgotPassword() {
       e.preventDefault();
       navigate("/LoginForm");
     };
+    
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-r from-gray-700 via-rose-500 to-orange-400">
       <form className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl w-full max-w-md border-white/20">
@@ -17,7 +18,7 @@ function ForgotPassword() {
           Forgot Password
         </h2>
         <p className=" text-base mb-3 text-center text-pink-50">
-          Enter your email and we'll sen you reset instructions.
+          Reset time! Enter your email and we´ll send you a secret key to get back in the game.
         </p>
         <input
           typ="email"
