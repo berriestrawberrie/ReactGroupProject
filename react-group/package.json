@@ -11,8 +11,15 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.5",
+<<<<<<< HEAD
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
+=======
+    "html-entities": "^2.6.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.1.5"
+>>>>>>> Game
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
