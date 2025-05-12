@@ -1,4 +1,5 @@
 import { decodeEntity } from "html-entities"
+import Star from '../../images/star_purple.svg'
 
 export default function EmojiButtion({
     content,
@@ -29,14 +30,14 @@ export default function EmojiButtion({
 
     return (
         <button
-            className={`btn btn--emoji ${btnStyle}`}
+            className={`btn btn--emoji ${btnStyle} flex justify-center items-center`}
             //RUN ONLY WHEN CARD IS CLICKED 
             onClick={handleClick}
             //IF MATCHED TRUE DISABLE CARD
             disabled={matchedCardEntry}
             aria-label={`Position ${index+1}: ${btnAria}`}
             aria-live="polite"            >
-            {btnContent}
+            {btnContent==="?"? <img src={Star} width="60%"/> : btnContent }
             
         </button>
     )
