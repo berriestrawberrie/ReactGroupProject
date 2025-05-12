@@ -3,6 +3,7 @@ import { decodeEntity } from 'html-entities'
 import Form from './components/Form.jsx'
 import MemoryCard from './components/MemoryCard.jsx'
 import GameOver from './components/GameOver.jsx'
+import ScoreBoard from './components/ScoreBoard.jsx'
 
 export default function App() {
     const [isGameOn, setIsGameOn] = useState(false)
@@ -10,8 +11,10 @@ export default function App() {
     const [selectedCards, setSelectedCards] = useState([])
     const [matchedCards, setMatchedCards] =useState([])
     const [allMatched, setAllMatched] = useState(false)
+    const [score, setScore] = useState(0)
+
   
-    console.log(matchedCards)
+
     //END GAME WHEN ALL CARDS ARE MATCHED
     useEffect(()=>{
 
@@ -29,12 +32,15 @@ export default function App() {
 
             //ADD CURRENT MATCHED OBJECTS TO ALL PREVIOUS MATCHED OBJECTS
             setMatchedCards(previous => [...previous, ...selectedCards ])
+            setScore(previous => previous = previous + 1)
 
         }
 
 
     },[selectedCards])
 
+
+    
     async function startGame(e) {
         //PREVENT BUTTON FROM DEFAULT FORM ACTION
         e.preventDefault()
@@ -79,7 +85,7 @@ export default function App() {
     function getRandomIndices(data){
         const randomIndicesArray= []
 
-        for(let i=0; i< 5; i++){
+        for(let i=0; i< 8; i++){
              const randomNum = Math.floor(Math.random() * data.length)
 
             //IF RANDOM INDEX NOT ALREADY SELECTED ADD TO ARRAY
@@ -137,17 +143,18 @@ export default function App() {
         setSelectedCards([])
         setMatchedCards([])
         setAllMatched(false)
+        setScore(0)
         
     }
     
     return (
         <main>
             <h1>Memory</h1>
-    
+            
             {!isGameOn && <Form handleSubmit={startGame} />}
     
             {allMatched && <GameOver handleClick={resetGame}/>}
-        
+            {isGameOn && <ScoreBoard score={score} allMatched={allMatched}/>}
             {isGameOn && <MemoryCard 
                 handleClick={turnCard} 
                 data={emojisData} 
