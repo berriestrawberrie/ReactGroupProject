@@ -42,7 +42,7 @@ function LoginForm() {
         </h1>
       <form 
         onSubmit={handleLogin}
-        className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-md border border-white/20"
+        className=" bg-white/40  backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-md border border-white/20"
         >
         <h2 className="text-2xl font-bold text-white text-center mb-6">Login</h2>
 
