@@ -12,6 +12,7 @@ export default function App() {
     const [matchedCards, setMatchedCards] =useState([])
     const [allMatched, setAllMatched] = useState(false)
     const [score, setScore] = useState(0)
+    const [mode, setMode] = useState(3)
 
   
 
@@ -55,7 +56,7 @@ export default function App() {
           }//END OF IF
 
           const data = await response.json()
-          const dataSlice = getDataSlice(data)
+          const dataSlice = getDataSlice(data,mode)
           const emojisArray = getEmojisArray(dataSlice)
 
 
@@ -70,10 +71,10 @@ export default function App() {
 
     }//END OF STARTGAME FUNCTION
     
-    function getDataSlice(data){
+    function getDataSlice(data,mode){
 
         //GET THE RANDOM INDICES
-        const randomIndices = getRandomIndices(data)
+        const randomIndices = getRandomIndices(data,mode)
 
         //PULL THE INDICES FROM THE API DATA
         const dataSlice = randomIndices.map(index => data[index])
@@ -82,10 +83,10 @@ export default function App() {
         return dataSlice
     }//END OF GET DATA SLICE
 
-    function getRandomIndices(data){
+    function getRandomIndices(data,mode){
         const randomIndicesArray= []
 
-        for(let i=0; i< 3; i++){
+        for(let i=0; i< mode; i++){
              const randomNum = Math.floor(Math.random() * data.length)
 
             //IF RANDOM INDEX NOT ALREADY SELECTED ADD TO ARRAY
@@ -144,13 +145,21 @@ export default function App() {
         setMatchedCards([])
         setAllMatched(false)
         setScore(0)
+        setMode(3)
         
     }
     
     return (
         <main className="min-h-screen flex flex-col items-center justify-center bg-linear-to-r from-pink-500 via-red-500 to-orange-500 p-8">
-            <h1>Memory</h1>
-                {allMatched && <GameOver handleClick={resetGame}/>}
+            <div className='flex'>
+                <h1 className="flex items-center">Matchmoji</h1>
+                {isGameOn? "" : <select className="difficulty ms-2" onChange={(e)=>setMode(e.target.value)}>
+                    <option value="3">Easy</option>
+                    <option value="5">Medium</option>
+                    <option value="10">Hard</option>
+                    </select>}
+            </div>
+                {allMatched && <GameOver handleClick={resetGame} score={score}/>}
                 {isGameOn && <ScoreBoard score={score} allMatched={allMatched}/>}
             <div className="gameboard bg-white/40 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-3/4 border border-white/20">
                 {!isGameOn && <Form handleSubmit={startGame} />}
