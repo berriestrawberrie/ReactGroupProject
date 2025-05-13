@@ -25,13 +25,14 @@ function LoginForm() {
     e.preventDefault();
 
     if (rememberMe) {
-    localStorage.setItem("rememberedusername", username);
-    localStorage.setItem("rememberedpassword", password);
+    localStorage.setItem("rememberedUsername", username);
+    localStorage.setItem("rememberedPassword", password);
     } else {
       localStorage.removeItem("rememberedUsername");
       localStorage.removeItem("rememberedPassword");
     }
 
+    localStorage.setItem("currentUsername", username);
     navigate("/game");
   };
 
