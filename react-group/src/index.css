@@ -31,6 +31,9 @@ h1 {
   text-transform: uppercase;
   margin: 0;
 }
+h2{
+  margin: 0 auto;
+}
 
 .p--large {
   font-size: 1.5rem;
@@ -47,7 +50,7 @@ Buttons
   background-color: var(--light-primary);
   color: var(--dark-primary);
   font-family: inherit;
-  border: 2px solid var(--dark-primary);
+  border: 2px solid #8115c0;
   border-radius: .5em;
   cursor: pointer;
 }
@@ -158,13 +161,13 @@ Game
 .btn--emoji__front:hover,
 .btn--emoji__front:focus {
   background-color: var(--accent);
-  border: 2px solid var(--dark-primary);
+  border: 2px solid #8115c0;
   box-shadow: 0 0 5px 2px var(--light-primary);
   cursor: pointer;
 }
 
 .card-item--selected .btn--emoji__back--selected {
-  border: 2px solid var(--dark-primary);
+  border: 2px solid #8115c0;
   box-shadow: 0 0 5px 2px var(--light-primary);
 }
 
@@ -218,6 +221,13 @@ Media queries
   }
 }
 
-
+.difficulty {
+  margin-top: 10px;
+  height: 30px;
+  padding: 5px;
+  background-color: white;
+  color: #ce0033;
+  border: #ce0033;
+}
 
 @import "tailwindcss";
