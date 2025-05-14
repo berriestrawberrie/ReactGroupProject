@@ -160,9 +160,17 @@ export default function App() {
           </div>
         )}
 
-         <h1>Memory/MatchMoji</h1>
+         <h1>MatchMoji</h1>
 
-         {username && (
+         {isGameOn? 
+         //MESSAGE WHEN GAME IS ON
+         username && (
+            <p className="text-rose-50 text-lg mb-4">
+              Good job matching {username}!
+            </p>
+         ) 
+         //MESSAGE BEFORE GAME IS ON
+         : username && (
             <p className="text-rose-50 text-lg mb-4">
               Great to see you {username}! Ready to match some emojis?
             </p>
